@@ -21,12 +21,11 @@ public class Main1 {
         Student[] s = new Student[1];
         
         for(int i = 0; i < s.length; i++){
-            s[i] = new Student();
+            s[i] = new Student(JOptionPane.showInputDialog("Matricula do aluno " + i + ": "), JOptionPane.showInputDialog("Nome do aluno " + i + ": "));
         }
         
         for(int i = 0; i < s.length; i++){
-            s[i].setName(JOptionPane.showInputDialog("Nome do aluno " + i + ": "));
-            s[i].setMatricula(JOptionPane.showInputDialog("Matricula do aluno " + i + ": "));
+
             do{
                 s[i].setProva1(Float.parseFloat(JOptionPane.showInputDialog("Nota da prova 1 do aluno " + i + ": ")));
             }while(s[i].getProva1() < 0 || s[i].getProva1() > 10);
@@ -38,17 +37,15 @@ public class Main1 {
             do{
                 s[i].setTrabalho(Float.parseFloat(JOptionPane.showInputDialog("Nota do trabalho do aluno " + i + ": ")));
             }while(s[i].getTrabalho() < 0 || s[i].getTrabalho() > 10);
-            
-            s[i].setMedia(s[i].Media(s[i].getProva1(), s[i].getProva2(), s[i].getTrabalho()));
         }
         
         for(int i = 0; i < s.length; i++){
-            JOptionPane.showMessageDialog(null, "Nome: " + s[i].getName() + " Matricula: " + s[i].getMatricula());
-            JOptionPane.showMessageDialog(null, "Notas: prova 1: " + s[i].getProva1() + ", prova 2: " + s[i].getProva2() + ", trabalho: " + s[i].getTrabalho());
-            JOptionPane.showMessageDialog(null, "Media das avaliacoes: " + s[i].getMedia());
-            
-            if(s[i].getMedia() < 6.0f){
-                JOptionPane.showMessageDialog(null, "O aluno precisa tirar na recuperacao " + s[i].Rec(s[i].getMedia()) + " para passar na media");
+            JOptionPane.showMessageDialog(null, "Nome: " + s[i].getName() + "\nMatricula: " + s[i].getMatricula());
+            JOptionPane.showMessageDialog(null, "Notas: prova 1: " + s[i].getProva1() + "\nprova 2: " + s[i].getProva2() + "\ntrabalho: " + s[i].getTrabalho());
+            JOptionPane.showMessageDialog(null, "Media das avaliacoes: " + s[i].Media());
+     
+            if(s[i].Media() < 6.0f){
+                JOptionPane.showMessageDialog(null, "O aluno precisa tirar na recuperacao " + s[i].Rec() + " para passar na media");
             }            
         }
     }

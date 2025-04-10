@@ -6,20 +6,39 @@ package exercicio4;
 
 /**
  *
- * @author emef-jbmarcondes
+ * @author joaoapassos
  */
 public class Main4 {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        Data d = new Data();
+    public static void main(String[] args) {   
         
-        String data = d.dataCompleta();
+        Data newData = new Data();
         
-        System.out.println(data);
-        System.out.println(d.getValidData());
+        Data d1 = new Data(24, 10, 2025);
+        
+        String data1 = d1.dataCompleta();
+        
+        System.out.println(data1);
+        System.out.println(d1.getValidData());
+        //System.out.println(d1.avancarData());
+
+
+        Data d2 = new Data(31, 10, 2020);
+        
+        String data2 = d2.dataCompleta();
+        
+        System.out.println(data2);
+        System.out.println(d2.getValidData());
+        //System.out.println(d2.avancarData());
+
+
+        System.out.println(newData.verefDatas(data1, data2));
+
+        System.out.println(d2.verifAnoBissexto());
+
     }
     
 }

@@ -14,20 +14,25 @@ public class Student {
     private float prova1;
     private float prova2;
     private float trabalho;
-    private float media;
-    
-    float Media(float p1, float p2, float t){
-        float md = (p1*2.5f + p2*2.5f + t*2)/7;
-        return md;
+
+    Student (String matricula, String nome){
+        this.matricula = matricula;
+        this.name = nome;
+        this.prova1 = 0;
+        this.prova2 = 0;
+        this.trabalho = 0;
     }
     
-    float Rec(float media){
+    float Media(){
+        return ((this.prova1*2.5f) + (this.prova2*2.5f) + (this.trabalho*2))/7;
+    }
+    
+    float Rec(){
+        float media = Media();
         float res = 0;
-        if(media>5.9f){
-            System.out.println("A media do aluno supera 5.9, portanto nao ha recuperacao");
-        }
-        else{
-            res = 6.0f - media;
+        
+        if(media < 6.0f){
+            res = 12.0f - media;
         }
         
         return res;        
@@ -52,10 +57,6 @@ public class Student {
     public void setTrabalho(float trabalho) {
         this.trabalho = trabalho;
     }
-    
-    public void setMedia(float media) {
-        this.media = media;
-    }
 
     public String getMatricula() {
         return matricula;
@@ -75,10 +76,6 @@ public class Student {
 
     public float getTrabalho() {
         return trabalho;
-    }
-
-    public float getMedia() {
-        return media;
     }
 
     
