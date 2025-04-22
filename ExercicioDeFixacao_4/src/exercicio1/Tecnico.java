@@ -7,6 +7,10 @@ public class Tecnico extends Assistente{
     }
 
     public double ganhoAnual(double bonus){
-        return super.ganhoAnual() + bonus;
+        return (super.getSalario() + bonus)*12;
+    }
+
+    public String exibeDados(double valor){
+        return "Nome: " + super.getNome() + "\nSalario: R$" + super.getSalario() + "\nGanho Anual: R$" + ganhoAnual(valor) + "\nMatricula: " + super.getMatricula() + "\n";
     }
 }

@@ -11,9 +11,8 @@ public class Funcionario {
         this.salario = sal;
     }
 
-    public double addAumento(double valor){
+    public void addAumento(double valor){
         this.salario += valor;
-        return this.salario;
     }
 
     public double ganhoAnual(){
@@ -21,7 +20,7 @@ public class Funcionario {
     }
 
     public String exibeDados(){
-        return "Nome: " + this.nome + "\nSalario: R$" + this.salario + "\n\nGanho Anual: R$" + ganhoAnual();
+        return "Nome: " + this.nome + "\nSalario: R$" + this.salario + "\nGanho Anual: R$" + ganhoAnual() + "\n";
     }
 
     public void setNome(String nome){

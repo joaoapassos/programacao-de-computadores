@@ -30,6 +30,6 @@ public class Assistente extends Funcionario{
     }
 
     @Override public String exibeDados(){
-        return super.exibeDados() + "\nMatricula: " + this.matricula;
+        return super.exibeDados() + "Matricula: " + this.matricula + "\n";
     }
 }
