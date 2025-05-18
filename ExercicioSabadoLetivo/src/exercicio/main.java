@@ -9,9 +9,9 @@ public class main {
         // System.out.println(cp.toString());
         // System.out.println(cu.toString());
 
-        // cc.depositar(100);
-        // cp.depositar(100);
-        // cu.depositar(100);
+        cc.depositar(100);
+        cp.depositar(100);
+        cu.depositar(100);
 
         // System.out.println(cc.toString());
         // System.out.println(cp.toString());
@@ -21,7 +21,7 @@ public class main {
         
         // System.out.println(cu.toString());
         
-        // cc.transfirir(ce, 100);
+        cc.transfirir(ce, 100);
         
         // System.out.println(cc.toString());
         // System.out.println(ce.toString());
@@ -30,14 +30,21 @@ public class main {
         // ContaBancaria.RelatorioContas(contas);
 
     
-        System.out.println(cc.toString());
-        System.out.println(cu.toString());
+        // System.out.println(cc.toString());
+        // System.out.println(cu.toString());
         
         Banco.realizarTransferencia(cc, cu, 100);
 
 
-        System.out.println(cc.toString());
-        System.out.println(cu.toString());
+        // System.out.println(cc.toString());
+        // System.out.println(cu.toString());
+
+
         
+        PoliticaTarifa newTarifa = (conta) -> 100;
+        
+        ce.aplicarTarifa(newTarifa.CalcularTarifa(ce));
+
+        ce.ImprimirExtrato();
     }
 }

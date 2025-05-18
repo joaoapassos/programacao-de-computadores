@@ -8,7 +8,7 @@ public class ContaUniversitaria extends ContaBancaria implements Transferencia{
     protected void depositar(double valor){
         if(valor + super.getSaldo() > 5000.0f){
             valor = 0;
-            System.out.println("Limite de saldo atingido, nenhum valor adicionado");
+            LimitSaldoException(0);
         }
 
         super.depositar(valor);
@@ -21,27 +21,24 @@ public class ContaUniversitaria extends ContaBancaria implements Transferencia{
 
     @Override
     public void transfirir(ContaBancaria destino, double valor){
-        double tarifa = calcularTarifaMensal();
-        double total = valor + tarifa;
-        
-        if(temSaldoSuficiente(total)){
-            super.debitar(total);
+        if(temSaldoSuficiente(valor)){
+            super.debitar(valor);
             destino.depositar(valor);
-            System.out.println("Transferência: R$" + valor + " | Tarifa: R$" + tarifa);
+            System.out.println("Transferência: R$" + valor);
+            AddRegistro("Transferencia", valor);
         } else {
-            System.out.println("Saldo insuficiente para transferência.");
+            SaldoInsuficienteException(1);
         }
     }
 
     @Override
     public void sacar(double valor){
-        double tarifa = calcularTarifaMensal();
-        double total = valor + tarifa;
-        if(temSaldoSuficiente(total)){
-            super.debitar(total);
-            System.out.println("Saque feito no valor de: R$" + valor + "+ Tarifa cobrada de: R$" + tarifa);
+        if(temSaldoSuficiente(valor)){
+            super.debitar(valor);
+            System.out.println("Saque feito no valor de: R$" + valor);
+            AddRegistro("Saque", valor);
         } else {
-            System.out.println("Saldo insuficiente para Saque.");
+            SaldoInsuficienteException(0);
         }
     }
 

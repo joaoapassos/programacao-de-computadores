@@ -1,8 +1,13 @@
 package exercicio;
-public abstract class ContaBancaria extends Banco{
+
+import java.util.ArrayList;
+
+public abstract class ContaBancaria extends Banco implements Exception{
     private int numero;
     private String agencia;
     private double saldo;
+    private RegistroOperacoes Registro = new RegistroOperacoes();
+    private Log log;
 
     ContaBancaria(int n, String a, double s){
         this.numero = n;
@@ -13,15 +18,12 @@ public abstract class ContaBancaria extends Banco{
 
     protected void depositar(double valor){
         if(valor > 0){
-            double tarifa = calcularTarifaMensal();
-            valor = aplicarTarifa(tarifa, valor);
+            AddRegistro("Deposito", valor);
             creditar(valor);
         }
     }
 
-    protected void sacar(double valor){
-        debitar(valor);
-    }
+    protected void sacar(double valor){}
 
     public double getSaldo() {
         return this.saldo;
@@ -33,8 +35,12 @@ public abstract class ContaBancaria extends Banco{
         System.out.println("\nSaldo: R$" + this.saldo);
     }
 
-    protected double aplicarTarifa(double tarifa, double valor){
-        return valor - tarifa;
+    protected void aplicarTarifa(double politicaTarifa){
+
+        double tarifa = ((politicaTarifa == 0) ? calcularTarifaMensal() : politicaTarifa);
+        this.saldo = this.saldo - tarifa;
+
+        AddRegistro("Aplicação de Tarifa", tarifa);
     }
 
     protected void creditar(double valor) {
@@ -47,6 +53,23 @@ public abstract class ContaBancaria extends Banco{
     
     public String toString(){
         return "\nNumero: " + this.numero + "\nAgencia: " + this.agencia + "\nSaldo: R$" + this.saldo;
+    }
+
+    public void AddRegistro(String type, double valor){
+        NewLog(type, valor);
+        Registro.AddRegistro(log);
+    }
+    public void RemoveRegistro(Log log){
+        Registro.RemoveRegistro(log);
+    }
+    public void ImprimirExtrato(){
+        System.out.println(Registro.GetAllRegistros());
+    }
+
+    public Log NewLog(String type, double valor){
+        log = new Log(type, valor);
+
+        return log;
     }
 
     protected abstract double calcularTarifaMensal();
@@ -79,6 +102,29 @@ public abstract class ContaBancaria extends Banco{
         }
     }
 
-    //protected abstract boolean SaldoInsuficienteException(double valor);
-    //protected abstract boolean ValorInvalidoException(double valor);
+     @Override
+    public void ValorInvalidoException(int i){
+        String[] mensagem = {
+            "Valor baixo para saque, valor minimo: R$100"
+        };
+        
+        System.out.println(mensagem[i]);
+    }
+    @Override
+    public void SaldoInsuficienteException(int i){
+        String[] mensagem = {
+            "Saldo insuficiente para Saque.", 
+            "Saldo insuficiente para transferência."
+        };
+        
+        System.out.println(mensagem[i]);
+    }
+    @Override
+    public void LimitSaldoException(int i){
+        String[] mensagem = {
+            "Limite de saldo atingido, nenhum valor adicionado"
+        };
+        
+        System.out.println(mensagem[i]);
+    }
 }

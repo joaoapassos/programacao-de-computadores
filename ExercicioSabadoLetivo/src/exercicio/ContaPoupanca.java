@@ -11,13 +11,12 @@ public class ContaPoupanca extends ContaBancaria{
 
     @Override
     public void sacar(double valor){
-        double tarifa = calcularTarifaMensal();
-        double total = valor + tarifa;
-        if(temSaldoSuficiente(total)){
-            super.debitar(total);
-            System.out.println("Saque feito no valor de: R$" + valor + "+ Tarifa cobrada de: R$" + tarifa);
+        if(temSaldoSuficiente(valor)){
+            super.debitar(valor);
+            System.out.println("Saque feito no valor de: R$" + valor);
+            AddRegistro("Saque", valor);
         } else {
-            System.out.println("Saldo insuficiente para Saque.");
+            SaldoInsuficienteException(0);
         }
     }
 
